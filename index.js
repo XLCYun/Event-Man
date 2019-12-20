@@ -40,6 +40,16 @@ class EventMan {
     let funcs = this.events[eventName]
     for (let f of funcs) await funcs.apply(this, args)
   }
+
+  async emitOnce(eventName, ...args) {}
+
+  async emitAll(eventName, ...args){}
+
+  async emitAny(eventName, ...args){}
+
+  async emitRace(eventName, ...args){}
+
+  async emitAllFinish(eventName, ...args){}
 }
 
 module.exports = EventMan

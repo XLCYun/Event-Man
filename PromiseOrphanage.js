@@ -23,7 +23,7 @@ class PromiseOrphanage {
   /** like once, return a promise which will be resolved when all promise is resolved,
    * and set rescue to true */
   get rescue() {
-    return this.once()
+    return this.once
   }
 
   /**
@@ -33,7 +33,7 @@ class PromiseOrphanage {
    * @param {Array} promises Promises to race
    * @param {Array} errors Collected error so far
    */
-  async recursiveRaceUntilResolved(promises, errors) {
+  recursiveRaceUntilResolved(promises, errors) {
     return new Promise((resolve, reject) => {
       if (promises.length === 0) reject(errors)
       Promise.race(promises).then(res => {
@@ -54,7 +54,7 @@ class PromiseOrphanage {
    * return a promise which will be resolved when all promises resolved
    * if no promise, return Promise.resolve()
    */
-  all() {
+  get all() {
     if (this.isRescued) return Promise.resolve()
     return Promise.all(this.shiveringPromises)
   }
@@ -63,7 +63,7 @@ class PromiseOrphanage {
    * return a Promise which will be resolved when all promised is resolved.
    * and set rescued to true.
    */
-  once() {
+  get once() {
     if (this.isRescued) return Promise.resolve()
     let tmp = this.shiveringPromises
     this.shiveringPromises = []
@@ -75,7 +75,7 @@ class PromiseOrphanage {
    * when one of the promises is resolved or rejected.
    * If there is not promised, it will return a forever pending promise.
    */
-  race() {
+  get race() {
     return Promise.race(this.shiveringPromises)
   }
 
@@ -84,7 +84,7 @@ class PromiseOrphanage {
    * if all rejected, returned Promised will be rejected.
    * if no promises, retunred rejected Promised.
    */
-  any() {
+  get any() {
     if (this.isRescued) return Promise.reject()
     // resolve first non-promise element
     for (let pro of this.shiveringPromises) if (Promise.resolve(pro) !== pro) return Promise.resolve(pro)
@@ -99,7 +99,7 @@ class PromiseOrphanage {
    * Returned promised will be resolved with a array contained
    * the result and Error that promises resolved or rejected with.
    */
-  allFinish() {
+  get allFinish() {
     if (this.isRescued) return Promise.resolve([])
     return Promise.all(promiseReflect(this.shiveringPromises)).then(values =>
       values.sort((r1, r2) => r1.index - r2.index).map(e => (e.status === "resolved" ? e.data : e.error))

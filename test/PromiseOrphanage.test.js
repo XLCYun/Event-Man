@@ -113,7 +113,7 @@ describe("all", () => {
 
   it("all function: all resolved", async function() {
     let orph = new PromiseOrphanage([resolvePromise, resolvedWithValue])
-    let res = await orph.all()
+    let res = await orph.all
     assert.equal(res.length, 2)
     assert.equal(res[0], undefined)
     assert.equal(res[1], "resolved")
@@ -124,7 +124,7 @@ describe("all", () => {
       resolvedWithValue,
       resolveMS(100)
     ])
-    res = await orph.all()
+    res = await orph.all
     assert.equal(res.length, 4)
     assert.equal(res[0], undefined)
     assert.equal(res[1].length, 3)
@@ -135,7 +135,7 @@ describe("all", () => {
     assert.equal(res[3], 100)
 
     orph = new PromiseOrphanage()
-    res = await orph.all()
+    res = await orph.all
     assert.equal(res, undefined)
   })
 })
@@ -157,13 +157,13 @@ describe("rescue", function() {
   })
 
   it("all rescued, call all", async () => {
-    let all = await orph.all()
+    let all = await orph.all
     assert.equal(all, undefined)
   })
 
   it("all rescued, call any", async () => {
     try {
-      let any = await orph.any()
+      let any = await orph.any
       assert.fail("should throw error")
     } catch (e) {}
   })
@@ -172,16 +172,16 @@ describe("rescue", function() {
     setTimeout(() => {
       done()
     }, 1000)
-    orph.race().then(e => assert.fail("should not be executed"))
+    orph.race.then(e => assert.fail("should not be executed"))
   })
 
   it("all rescued, call once", async () => {
-    let once = await orph.once()
+    let once = await orph.once
     assert.equal(once, undefined)
   })
 
   it("all rescued, call allFinish", async () => {
-    let allFinish = await orph.allFinish()
+    let allFinish = await orph.allFinish
     assert.deepEqual(allFinish, [])
   })
 })
@@ -189,14 +189,14 @@ describe("rescue", function() {
 describe("once", async () => {
   it("once, empty []", async () => {
     let orph = new PromiseOrphanage([])
-    assert.equal(await orph.once(), undefined)
+    assert.equal(await orph.once, undefined)
     assert.ok(orph.isRescued)
   })
 
   it("once, rejected", async () => {
     try {
       var orph = new PromiseOrphanage([rejectedPromise, rejectedWithError])
-      await orph.once()
+      await orph.once
       assert.fail("should not be executed")
     } catch (e) {}
     assert.ok(orph.isRescued)
@@ -204,14 +204,14 @@ describe("once", async () => {
 
   it("once, resolved", async () => {
     let orph = new PromiseOrphanage([resolvedWithValue, resolvePromise])
-    assert.deepEqual(await orph.once(), ["resolved", undefined])
+    assert.deepEqual(await orph.once, ["resolved", undefined])
     assert.ok(orph.isRescued)
   })
 
   it("once, resolved and rejected", async () => {
     try {
       var orph = new PromiseOrphanage([resolvedWithValue, resolvePromise, rejectedWithError])
-      await orph.once()
+      await orph.once
       assert.fail("should not be executed")
     } catch (e) {}
     assert.ok(orph.isRescued)
@@ -220,7 +220,7 @@ describe("once", async () => {
   it("once, resolveMS 5 10 15", async () => {
     try {
       var orph = new PromiseOrphanage([resolveMS(5), resolveMS(10), resolveMS(15)])
-      let res = await orph.once()
+      let res = await orph.once
       assert.deepEqual(res, [5, 10, 15])
     } catch (e) {}
     assert.ok(orph.isRescued)
@@ -245,40 +245,40 @@ describe("race", function() {
     setTimeout(() => {
       done()
     }, 1000)
-    orph.race().then(e => assert.fail("should not be executed"))
+    orph.race.then(e => assert.fail("should not be executed"))
   })
 
   it("race, resolved", async function() {
-    assert.equal(await resolvedOrph.race(), "resolved")
+    assert.equal(await resolvedOrph.race, "resolved")
   })
 
   it("race, rejected", async function() {
     try {
-      await rejectedOrph.race()
+      await rejectedOrph.race
       assert.fail("should not be executed")
     } catch (e) {}
   })
 
   it("reace, reject and resolved", async function() {
     try {
-      await rejAndResOrph.race()
+      await rejAndResOrph.race
       assert.fail("should not be executed")
     } catch (e) {}
   })
 
   it("race, resolved and rejected", async function() {
-    assert.equal(await resAndRejOrph.race(), "resolved")
+    assert.equal(await resAndRejOrph.race, "resolved")
   })
 
   it("race, resolveMS 50 100 150", async function() {
     let orph = new PromiseOrphanage([resolveMS(50), resolveMS(100), resolveMS(150)])
-    assert.equal(await orph.race(), 50)
+    assert.equal(await orph.race, 50)
   })
 
   it("race, resolveMS 50 100 150 rejectMS 20", async function() {
     let orph = new PromiseOrphanage([resolveMS(50), resolveMS(100), resolveMS(150), rejectMS(20)])
     try {
-      await orph.race()
+      await orph.race
     } catch (e) {
       assert.equal(e, 20)
     }
@@ -301,18 +301,18 @@ describe("any", function() {
   it("any, empty []", async function() {
     try {
       let orph = new PromiseOrphanage([])
-      await orph.any()
+      await orph.any
       assert.fail("should not be executed")
     } catch (e) {}
   })
 
   it("any, resolved", async function() {
-    assert.equal(await resolvedOrph.any(), "resolved")
+    assert.equal(await resolvedOrph.any, "resolved")
   })
 
   it("any, rejected", async function() {
     try {
-      await rejectedOrph.any()
+      await rejectedOrph.any
       assert.fail("should not be executed")
     } catch (e) {}
   })
@@ -320,25 +320,25 @@ describe("any", function() {
   it("any, inject promise, resolve first non-promise element", async function() {
     let orph = new PromiseOrphanage([resolvePromise, 34, rejectedPromise])
     orph.shiveringPromises.push(34)
-    assert.equal(await orph.any(), 34)
+    assert.equal(await orph.any, 34)
   })
 
   it("any, reject and resolved", async function() {
-    assert.equal(await rejAndResOrph.any(), "resolved")
+    assert.equal(await rejAndResOrph.any, "resolved")
   })
 
   it("any, resolved and rejected", async function() {
-    assert.equal(await resAndRejOrph.any(), "resolved")
+    assert.equal(await resAndRejOrph.any, "resolved")
   })
 
   it("any, resolveMS 50 100 150", async function() {
     let orph = new PromiseOrphanage([resolveMS(50), resolveMS(100), resolveMS(150)])
-    assert.equal(await orph.any(), 50)
+    assert.equal(await orph.any, 50)
   })
 
   it("any, resolveMS 50 100 150 rejectMS 20", async function() {
     let orph = new PromiseOrphanage([resolveMS(50), resolveMS(100), resolveMS(150), rejectMS(20)])
-    assert.equal(await orph.any(), 50)
+    assert.equal(await orph.any, 50)
   })
 })
 
@@ -357,21 +357,21 @@ describe("allFinish", function() {
 
   it("allFinish, empty []", async function() {
     let orph = new PromiseOrphanage([])
-    assert.deepEqual(await orph.allFinish(), [])
+    assert.deepEqual(await orph.allFinish, [])
   })
 
   it("allFinish, resolved", async function() {
-    assert.deepEqual(await resolvedOrph.allFinish(), ["resolved", undefined])
+    assert.deepEqual(await resolvedOrph.allFinish, ["resolved", undefined])
   })
 
   it("allFinish, rejected", async function() {
-    let res = await rejectedOrph.allFinish()
+    let res = await rejectedOrph.allFinish
     assert.ok(res[0] instanceof Error)
     assert.ok(res[1] === undefined)
   })
 
   it("allFinish, reject and resolved", async function() {
-    let res = await rejAndResOrph.allFinish()
+    let res = await rejAndResOrph.allFinish
     assert.ok(res[0] instanceof Error)
     assert.ok(res[1] === undefined)
     assert.ok(res[2] === "resolved")
@@ -379,7 +379,7 @@ describe("allFinish", function() {
   })
 
   it("allFinish, resolved and rejected", async function() {
-    let res = await resAndRejOrph.allFinish()
+    let res = await resAndRejOrph.allFinish
     assert.ok(res[0] === "resolved")
     assert.ok(res[1] === undefined)
     assert.ok(res[2] instanceof Error)
