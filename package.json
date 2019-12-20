@@ -1,0 +1,30 @@
+{
+  "name": "@xlcyun/event-man",
+  "version": "0.1.0",
+  "description": "Event Man is a event emitter which support async/sync operation, and is flexiable to customize how to the wait async listeners to finished.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XLCYun/Event-Man.git"
+  },
+  "keywords": [
+    "async",
+    "event",
+    "emitter"
+  ],
+  "author": "XLCYun@foxmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/XLCYun/Event-Man/issues"
+  },
+  "homepage": "https://github.com/XLCYun/Event-Man#readme",
+  "devDependencies": {
+    "mocha": "^6.2.2"
+  },
+  "dependencies": {
+    "nyc": "^14.1.1"
+  }
+}
