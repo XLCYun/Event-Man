@@ -57,7 +57,7 @@ let result = await event.emit("finished").once
 
 Return a Promise which works like [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all).
 
-It also will clear the Promises that created by the last time emition. Therefore is like:
+It also will clear the Promises that created by the last time emition. Therefore is equal to:
 
 ```js
 let result = await event.emit("finished").all
