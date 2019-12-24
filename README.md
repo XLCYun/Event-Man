@@ -2,6 +2,12 @@
 
 Event Man is a event emitter which support async/sync listener, and is flexiable to customize how to the wait async listeners to finish.
 
+## installation
+
+```bash
+npm install --save @xlcyun/event-man
+```
+
 ## Usage
 
 ```js
@@ -38,7 +44,7 @@ You can call `clear()` to clear the Promises that created and stored in Event Ma
 await event.emit("clear")
 event.clear()
 // or
-await event.emit('clear").clear()
+await event.emit("clear").clear()
 ```
 
 Be aware that **`emit` function return the instance of Event Man itself.**
