@@ -2,7 +2,7 @@
   "name": "@xlcyun/event-man",
   "version": "0.1.0",
   "description": "Event Man is a event emitter which support async/sync operation, and is flexiable to customize how to the wait async listeners to finished.",
-  "main": "index.js",
+  "main": "EventMan.js",
   "scripts": {
     "test": "mocha ./test"
   },

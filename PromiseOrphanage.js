@@ -7,7 +7,7 @@ let promiseReflect = require("./promiseReflect")
  */
 class PromiseOrphanage {
   constructor(promises) {
-    this.id = Symbol()
+    this.symbol = Symbol()
     this.shiveringPromises = []
     if (promises)
       if (typeof promises[Symbol.iterator] === "function") {
@@ -22,7 +22,7 @@ class PromiseOrphanage {
 
   /** like once, return a promise which will be resolved when all promise is resolved,
    * and set rescue to true */
-  get rescue() {
+  rescue() {
     return this.once
   }
 
