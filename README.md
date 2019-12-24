@@ -64,7 +64,7 @@ let result = await event.emit("finished").all
 event.clear()
 ```
 
-`result` will be a array containing the values of all async listeners return.
+`result` will be a array contains the values of all async listeners return.
 
 ## all
 
