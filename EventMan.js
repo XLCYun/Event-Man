@@ -158,6 +158,21 @@ class EventMan {
     this.PromiseOrphanageCollection = {}
     return new PromiseOrphanage(allPromises)
   }
+
+  /**
+   * clear all listeners that listening on the event
+   * @param {string} name event name
+   */
+  clearListener(name) {
+    delete this.events[name]
+  }
+
+  /**
+   * clear all listeners
+   */
+  clearAllListener() {
+    this.events = {}
+  }
 }
 
 module.exports = EventMan

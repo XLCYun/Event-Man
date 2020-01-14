@@ -454,4 +454,49 @@ describe("event man", function() {
       } catch (e) {}
     })
   })
+
+  describe("clearListener", function() {
+    let event
+    let existedOrph
+    this.beforeEach(() => {
+      event = new EventMan()
+      existedOrph = new PromiseOrphanage()
+      event.lastSymbol = existedOrph.symbol
+      event.PromiseOrphanageCollection[event.lastSymbol] = existedOrph
+    })
+
+    it("clear by name", function() {
+      let test = false
+      event.on("test clearListener", function() {
+        test = true
+        assert.fail("should not be executed")
+      })
+      event.clearListener("test clearListener")
+      event.emit("test clearListener")
+      assert.equal(test, false)
+    })
+  })
+
+  describe("clearAllListener", function() {
+    let event
+    let existedOrph
+    this.beforeEach(() => {
+      event = new EventMan()
+      existedOrph = new PromiseOrphanage()
+      event.lastSymbol = existedOrph.symbol
+      event.PromiseOrphanageCollection[event.lastSymbol] = existedOrph
+    })
+
+    it("clear by name", function() {
+      let test = false
+      const func = function() {
+        test = true
+        assert.fail("should not be executed")
+      }
+      for (let i = 0; i < 100; i++) event.on(i.toString(), func)
+      event.clearAllListener("test clearListener")
+      for (let i = 0; i < 100; i++) event.emit(i.toString())
+      assert.equal(test, false)
+    })
+  })
 })
