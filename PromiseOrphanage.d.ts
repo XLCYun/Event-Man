@@ -1,5 +1,5 @@
 // Type definitions for PromiseOrphanage
-// Definitions by: XLCYun@foxmail.com <https://github.com/XLCYun?tab=repositories>
+// Definitions by: XLCYun@foxmail.com <https://github.com/XLCYun>
 
 /*~ This declaration specifies that the class constructor function
  *~ is the exported object from the file
