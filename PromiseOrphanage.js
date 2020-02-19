@@ -1,6 +1,6 @@
 "use strict"
 
-let promiseReflect = require("./promiseReflect")
+let promiseReflect = require("multiple-promises-reflect")
 
 /**
  * Containing and managing promises.
