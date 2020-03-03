@@ -12,7 +12,7 @@ declare class EventMan<BindThis = any, AsyncResolvedData = any, AsyncRejectedErr
   thisArgs: undefined | BindThis
 
   ensureEventListenerArray(eventName: string): void
-  on(eventName: string, funcs: AnyFunction | AnyFunction[])
+  on(eventName: string, funcs: AnyFunction | AnyFunction[]): void
   emit(eventName: string, ...args: any[]): EventMan
   getPromiseOrphanage(symbol?: Symbol): PromiseOrphanage
   removePromiseOrphanage(symbol?: Symbol): PromiseOrphanage
@@ -33,7 +33,8 @@ declare namespace EventMan {
     [index: string]: AnyFunction[]
   }
   export interface PromiseOrphanageCollection<AsyncResolvedData = any, AsyncThrowError = Error> {
-    [index: Symbol]: PromiseOrphanage<AsyncResolvedData, AsyncThrowError>
+    // index should be symbol, not supported by TS.
+    [index: string]: PromiseOrphanage<AsyncResolvedData, AsyncThrowError>
   }
 }
 
