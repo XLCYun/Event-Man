@@ -9,7 +9,7 @@ declare class EventMan<BindThis = any, AsyncResolvedData = any, AsyncRejectedErr
   events: EventMan.EventRegisterRecord
   PromiseOrphanageCollection: EventMan.PromiseOrphanageCollection<AsyncResolvedData, AsyncRejectedError>
   lastSymbol: null | Symbol
-  thisArgs: undefined | BindThis
+  thisArg: undefined | BindThis
 
   ensureEventListenerArray(eventName: string): void
   on(eventName: string, funcs: AnyFunction | AnyFunction[]): void
